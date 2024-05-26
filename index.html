@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Visualization</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Search Visualization</h1>
+    <div>
+        <label for="arraySize">Array Size:</label>
+        <input type="number" id="arraySize" placeholder="50000">
+    </div>
+    <div>
+        <label for="minValue">Min Value:</label>
+        <input type="number" id="minValue" placeholder="-100000">
+    </div>
+    <div>
+        <label for="maxValue">Max Value:</label>
+        <input type="number" id="maxValue" placeholder="100000">
+    </div>
+    <button onclick="generateArray()">Generate Array</button>
+    <div id="arrayContainer" class="array-container"></div>
+    <div>
+        <label for="searchInput">Search Value:</label>
+        <input type="number" id="searchInput">
+    </div>
+    <div>
+        <label for="searchMethod">Search Method:</label>
+        <select id="searchMethod">
+            <option value="linear">Linear Search</option>
+            <option value="interpolation">Interpolation Search</option>
+            <option value="fibonacci">Fibonacci Search</option>
+            <option value="hash">Hash Search</option>
+        </select>
+    </div>
+    <button onclick="startSearch()">Start Search</button>
+    <button onclick="stopSearch()">Stop Search</button>
+    <button onclick="ClearAllFields()">Clear</button>
+    <button onclick="saveToFile()">Save Results</button>
+    <div id="result"></div>
+    <div id="complexity"></div>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

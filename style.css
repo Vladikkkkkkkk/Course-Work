@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    border-top: 10000px;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 600px;
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+input[type="number"]{
+    padding: 8px;
+    width: 80px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.array-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.array-element {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.4s;
+}
+
+.array-element.active {
+    background-color: #FFD700;
+}
+
+.array-element.found {
+    background-color: #28a745;
+}
+
+.result-comparisons {
+    color: darkorange;
+}
+
+.result-invalid {
+    color: red;
+}
+
+.result-found {
+    color: green;
+}
+
+.result-not-found {
+    color: black;
+}
+

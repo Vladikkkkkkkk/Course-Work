@@ -7,6 +7,8 @@ export class FibonacciSearch {
         let fibMMm2 = 0;
         let fibMMm1 = 1;
         let fibM = fibMMm1 + fibMMm2;
+        let comparisonCount = 0;
+        const comparisons = document.getElementById("complexity");
 
         while (fibM < n) {
             fibMMm2 = fibMMm1;
@@ -37,6 +39,8 @@ export class FibonacciSearch {
                 await new Promise(resolve => setTimeout(resolve));
             }
 
+            comparisonCount++;
+
             if (this.array[i] < value) {
                 fibM = fibMMm1;
                 fibMMm1 = fibMMm2;
@@ -51,6 +55,8 @@ export class FibonacciSearch {
                     element.classList.remove("active");
                     element.classList.add("found");
                 }
+                comparisons.innerText = `Number of comparisons: ${comparisonCount}`;
+                comparisons.className = "result-comparisons";
                 return i;
             }
         }
@@ -60,9 +66,13 @@ export class FibonacciSearch {
             if(element) {
                 element.classList.add("found");
             }
+            comparisons.innerText = `Number of comparisons: ${comparisonCount}`;
+            comparisons.className = "result-comparisons";
             return offset + 1;
         }
 
+        comparisons.innerText = `Number of comparisons: ${comparisonCount}`;
+        comparisons.className = "result-comparisons";
         return -1;
     }
 }

@@ -7,6 +7,8 @@ export class InterpolationSearch {
         let pos;
         let low = 0;
         let high = this.array.length - 1;
+        let comparisonCount = 0;
+        const comparisons = document.getElementById("complexity");
 
 
         while (low <= high && value >= this.array[low] && value <= this.array[high]) {
@@ -18,6 +20,8 @@ export class InterpolationSearch {
                 });
                 return -1;
             }
+
+            comparisonCount++;
 
             pos = low + Math.floor(((high - low) / (this.array[high] - this.array[low])) * (value - this.array[low]));
 
@@ -38,6 +42,8 @@ export class InterpolationSearch {
                     element.classList.remove("active");
                     element.classList.add("found");
                 }
+                comparisons.innerText = `Number of comparisons: ${comparisonCount}`;
+                comparisons.className = "result-comparisons";
                 return pos;
             }
 
@@ -48,6 +54,8 @@ export class InterpolationSearch {
             }
         }
 
+        comparisons.innerText = `Number of comparisons: ${comparisonCount}`;
+        comparisons.className = "result-comparisons";
         return -1;
     }
 }

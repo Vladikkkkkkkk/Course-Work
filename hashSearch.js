@@ -32,10 +32,14 @@ class SeparateChainingLinkedList {
     async find(key, isStopped, visualize) {
         const index = this.hash(key);
         let current = this.table[index];
+        let comparisonCount = 0;
+        const comparisons = document.getElementById("complexity");
+
         while (current) {
             if (isStopped()) {
                 return -1;
             }
+            comparisonCount++;
 
             if (visualize) {
                 const element = document.getElementById(`element-${current.value}`);
@@ -52,11 +56,17 @@ class SeparateChainingLinkedList {
                         element.classList.add("found");
                     }
                 }
+
+                comparisons.innerText = `Number of comparisons: ${comparisonCount}`;
+                comparisons.className = "result-comparisons";
                 return current.value;
             }
 
             current = current.next;
         }
+
+        comparisons.innerText = `Number of comparisons: ${comparisonCount}`;
+        comparisons.className = "result-comparisons";
         return -1;
     }
 }

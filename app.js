@@ -24,6 +24,30 @@ function renderArray(array) {
     });
 }
 
+function validateInput(arraySize, minValue, maxValue) {
+    if (isNaN(arraySize) || isNaN(minValue) || isNaN(maxValue)) {
+        alert("Some fields are empty. Fill in the array size, minimum value, and maximum value fields to generate an array.");
+        return false;
+    }
+    if (!Number.isInteger(arraySize) || !Number.isInteger(minValue) || !Number.isInteger(maxValue)) {
+        alert("Please, enter integer values for the array size, minimum, and maximum values.");
+        return false;
+    }
+    if (arraySize > 50000 || minValue < -100000 || maxValue > 100000) {
+        alert("Array size cannot be bigger than 50,000. Boundary values must be in the range [-100,000; 100,000]");
+        return false;
+    }
+    if (arraySize <= 0) {
+        alert("Array size cannot be negative or equal to 0.");
+        return false;
+    }
+    if (arraySize > maxValue - minValue + 1) {
+        alert("Array size must be less than or equal to the range of boundary values while the upper bound must be always greater than the lower one.");
+        return false;
+    }
+    return true;
+}
+
 window.generateArray = function() {
     const arraySize = parseFloat(document.getElementById("arraySize").value);
     const minValue = parseFloat(document.getElementById("minValue").value);
@@ -35,20 +59,7 @@ window.generateArray = function() {
     resultDiv.innerText = '';
     comparisons.innerText = '';
 
-    if(isNaN(arraySize) || isNaN(minValue) || isNaN(maxValue)){
-        alert("Some fields are empty. Fill in the array size, minimum value and maximum value fields to generate an array.");
-        return;
-    } else if (!Number.isInteger(arraySize) || !Number.isInteger(minValue) || !Number.isInteger(maxValue)) {
-        alert("Please, enter integer values for the array size, minimum, and maximum values.");
-        return;
-    } else if(arraySize > 50000 || minValue < -100000 || maxValue > 100000){
-        alert("Array size cannot be bigger than 50 000. Boundary values must be in range -100 000 - 100 000");
-        return;
-    } else if (arraySize <= 0){
-        alert("Array size cannot be negative or equal to 0.");
-        return;
-    } else if (arraySize > maxValue - minValue + 1){
-        alert("Array size must be less than or equal to the range of boundary values while upper bound must be always greater than the lower one.");
+    if (!validateInput(arraySize, minValue, maxValue)) {
         return;
     }
 
@@ -68,7 +79,7 @@ window.startSearch = async function() {
     const resultDiv = document.getElementById("result");
     const comparisons = document.getElementById("complexity");
 
-    if(array.length > 100) {
+    if (array.length > 100) {
         resultDiv.innerText = 'Searching..';
         resultDiv.className = "result-not-found";
     } else {
@@ -80,9 +91,11 @@ window.startSearch = async function() {
         resultDiv.innerText = "Value of element to search is missed. Fill in the field.";
         resultDiv.className = "result-invalid";
         return;
-    }else if(!Number.isInteger(searchInput)){
+    }
+    if (!Number.isInteger(searchInput)) {
         resultDiv.innerText = "Invalid input. Enter the integer number.";
         resultDiv.className = "result-invalid";
+        return;
     }
 
     const searchEngine = new SearchEngine(array);
@@ -91,9 +104,7 @@ window.startSearch = async function() {
         el.className = 'array-element';
     });
 
-    let resultIndex;
-
-    resultIndex = await searchEngine.search(searchInput, selectedMethod, () => isSearchStopped);
+    let resultIndex = await searchEngine.search(searchInput, selectedMethod, () => isSearchStopped);
 
     if (resultIndex !== -1 && resultIndex !== undefined) {
         resultDiv.innerText = `Element is found on the position ${resultIndex}`;

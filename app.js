@@ -24,7 +24,7 @@ function renderArray(array) {
     });
 }
 
-function validateInput(arraySize, minValue, maxValue) {
+function validateInput(arraySize, minValue, maxValue){
     if (isNaN(arraySize) || isNaN(minValue) || isNaN(maxValue)) {
         alert("Some fields are empty. Fill in the array size, minimum value, and maximum value fields to generate an array.");
         return false;
@@ -79,6 +79,11 @@ window.startSearch = async function() {
     const resultDiv = document.getElementById("result");
     const comparisons = document.getElementById("complexity");
 
+    if (array === null || array.length === 0) {
+        alert("Generate an array to start the search.");
+        return;
+    }
+
     if (array.length > 100) {
         resultDiv.innerText = 'Searching..';
         resultDiv.className = "result-not-found";
@@ -88,13 +93,11 @@ window.startSearch = async function() {
     }
 
     if (isNaN(searchInput)) {
-        resultDiv.innerText = "Value of element to search is missed. Fill in the field.";
-        resultDiv.className = "result-invalid";
+        alert("Value of element to search is missed. Fill in the field.");
         return;
     }
     if (!Number.isInteger(searchInput)) {
-        resultDiv.innerText = "Invalid input. Enter the integer number.";
-        resultDiv.className = "result-invalid";
+        alert("Enter the integer number.");
         return;
     }
 
@@ -151,10 +154,10 @@ window.saveToFile = function() {
 window.ClearAllFields = function() {
     document.getElementById("arrayContainer").innerHTML = '';
     document.getElementById("result").innerText = '';
+    document.getElementById("complexity").innerText = '';
     document.getElementById("arraySize").value = null;
     document.getElementById("maxValue").value = null;
     document.getElementById("minValue").value = null;
     document.getElementById("searchInput").value = null;
-    document.getElementById("complexity").innerText = '';
     array = [];
 }

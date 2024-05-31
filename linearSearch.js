@@ -6,9 +6,12 @@ export class LinearSearch {
     async search(value, isStopped) {
         let comparisonCount = 0;
         const comparisons = document.getElementById("complexity");
+        const resultDiv = document.getElementById("result");
 
         for (let i = 0; i < this.array.length; i++) {
             if (isStopped()) {
+                resultDiv.innerText = "search stopped";
+                resultDiv.className = "result-not-found";
                 this.array.forEach((_, index) => {
                     const element = document.getElementById(`element-${index}`);
                     element.classList.remove("active");
@@ -42,6 +45,7 @@ export class LinearSearch {
 
         comparisons.innerText = `Number of comparisons: ${comparisonCount}`;
         comparisons.className = "result-comparisons";
+
         return -1;
     }
 }

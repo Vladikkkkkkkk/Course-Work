@@ -9,11 +9,13 @@ export class InterpolationSearch {
         let high = this.array.length - 1;
         let comparisonCount = 0;
         const comparisons = document.getElementById("complexity");
-
+        const resultDiv = document.getElementById("result");
 
         while (low <= high && value >= this.array[low] && value <= this.array[high]) {
 
             if (isStopped()) {
+                resultDiv.innerText = "search stopped";
+                resultDiv.className = "result-not-found";
                 this.array.forEach((_, index) => {
                     const element = document.getElementById(`element-${index}`);
                     element.classList.remove("active");
@@ -56,6 +58,7 @@ export class InterpolationSearch {
 
         comparisons.innerText = `Number of comparisons: ${comparisonCount}`;
         comparisons.className = "result-comparisons";
+
         return -1;
     }
 }

@@ -29,7 +29,7 @@ class SearchApp {
 
     validateInput(arraySize, minValue, maxValue) {
         if (isNaN(arraySize) || isNaN(minValue) || isNaN(maxValue)) {
-            alert("Some fields are empty. Fill in the array size, minimum value and maximum value fields to generate an array.");
+            alert("Number values are missed. Fill in the array size, minimum value and maximum value fields with valid numbers to generate an array.");
             return false;
         }
         if (!Number.isInteger(arraySize) || !Number.isInteger(minValue) || !Number.isInteger(maxValue)) {
@@ -37,7 +37,7 @@ class SearchApp {
             return false;
         }
         if (arraySize > 50000 || minValue < -100000 || maxValue > 100000) {
-            alert("Array size cannot be bigger than 50,000. Boundary values must be in the range [-100,000; 100,000]");
+            alert("Array size cannot be bigger than 50,000. Boundary values must be in range [-100,000; 100,000]");
             return false;
         }
         if (arraySize <= 0) {
